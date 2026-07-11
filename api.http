@@ -1,0 +1,46 @@
+@baseUrl = http://localhost:3000
+
+@userId = 6a4e30b59c2785a07b77c01f
+
+### CREATE USER 1
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  
+  "email": "john45.doe@example.com",
+  "password": "test123"
+}
+
+### CREATE USER 2
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john55877.doe@example.com",
+  "password": "test123"
+}
+
+### GET ALL USERS
+GET {{baseUrl}}/users
+
+
+### GET USERS BY ID
+GET {{baseUrl}}/users/{{userId}}
+
+
+### GET USER BY ID
+PATCH {{baseUrl}}/users/{{userId}}
+
+
+### UPDATE USER BY ID
+PATCH {{baseUrl}}/users/{{userId}}
+Content-Type: application/json
+
+{
+  "name": "xyz"
+}
+
+### DELETE USER BY ID
+DELETE {{baseUrl}}/users/{{userId}}

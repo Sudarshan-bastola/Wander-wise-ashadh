@@ -42,10 +42,7 @@ UserSchema.pre("save", async function () {
 
 UserSchema.pre("findOneAndUpdate", async function () {
   if (this.getUpdate().password) {
-    this.getUpdate().password = await hash(
-      this.getUpdate().password,
-      10
-    );
+    this.getUpdate().password = await hash(this.getUpdate().password, 10);
   }
 });
 
