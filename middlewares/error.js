@@ -5,12 +5,7 @@ const errorMiddleware = (err, req, res, next) => {
     success: false,
     message: err.message || "Something went wrong",
     stack: process.env.NODE_ENV === "production" ? null : err.stack,
-    ...(err.errors?.length > 0 && { /**errors = array of objects */
-      errors: err.errors.map((error) => ({ /** errors means name only saying like these are errors */
-        field: error.field,
-        message: error.message,
-      })),
-    }),
+    ...(err.errors?.length > 0 && { errors: err.errors }),
   });
 };
 

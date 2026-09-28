@@ -1,14 +1,18 @@
 @baseUrl = http://localhost:3000
 
-@userId = 6a4e30b59c2785a07b77c01f
+@userId = 6a5619a53396437deef9f0bd
+@tripId = 6a61bb6f889ee9c896e6cf9f
+@baggageId = 6a66c34211129a12469b1123
+@itineraryId = 
 
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTU2MTlhNTMzOTY0MzdkZWVmOWYwYmQiLCJpYXQiOjE3ODYzNDU3NjYsImV4cCI6MTc4NjQzMjE2Nn0.QfOr3ZbqHDWNollCjdvQ7rK8VWNS80MYUXXc70k_jnM
+@tripToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0cmlwSWQiOiI2YTc5NzkzYWY2ZTFjNTg3ZTZjNDU2YTQiLCJpYXQiOjE3ODYzNDU4NzcsImV4cCI6MTc4NjM0OTQ3N30.EKGjPWqSj5jeEI71gFqrFLqRtDbBjGyLYONW86IAHcQ
 ### CREATE USER 1
 POST {{baseUrl}}/users
 Content-Type: application/json
 
 {
-  
-  "email": "john45.doe@example.com",
+  "email": "john45.doe11@example.com",
   "password": "test123"
 }
 
@@ -18,21 +22,16 @@ Content-Type: application/json
 
 {
   "name": "John Doe",
-  "email": "john55877.doe@example.com",
+  "email": "john558727.doe@example.com",
   "password": "test123"
 }
 
 ### GET ALL USERS
 GET {{baseUrl}}/users
 
-
-### GET USERS BY ID
-GET {{baseUrl}}/users/{{userId}}
-
-
 ### GET USER BY ID
-PATCH {{baseUrl}}/users/{{userId}}
-
+GET {{baseUrl}}/users/{{userId}}
+Authorization: Bearer {{token}}
 
 ### UPDATE USER BY ID
 PATCH {{baseUrl}}/users/{{userId}}
@@ -44,3 +43,164 @@ Content-Type: application/json
 
 ### DELETE USER BY ID
 DELETE {{baseUrl}}/users/{{userId}}
+
+### REGISTER USER
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "john doe",
+  "email": "jane43@exapmple.com",
+  "password": "test123"
+}
+
+### LOGIN USER
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "jane43@exapmple.com",
+  "password": "test123"
+}
+
+### CREATE TRIP
+POST {{baseUrl}}/trips
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "trips to Moon",
+  "startDate": "2025-12-12",
+  "endDate": "2026-12-24",
+  "budget": {
+    "total": 1000
+  },
+  "destinations": [
+    "moon",
+    "mars",
+    "jupiter"
+  ]
+}
+
+### GET ALL TRIPS
+GET {{baseUrl}}/trips
+Authorization: Bearer {{token}}
+
+### GET TRIP BY ID
+GET {{baseUrl}}/trips/{{tripId}}
+Authorization: Bearer {{token}}
+
+### UPDATE TRIP
+PATCH {{baseUrl}}/trips/{{tripId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "trips to mars"
+}
+
+### DELETE TRIP
+DELETE {{baseUrl}}/trips/{{tripId}}
+Authorization: Bearer {{token}}
+
+### CREATE BAGGAGE
+POST {{baseUrl}}/{{tripId}}/baggages
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Passport"
+}
+
+### GET ALL BAGGAGE OF A TRIP
+GET {{baseUrl}}/{{tripId}}/baggages
+Authorization: Bearer {{token}}
+
+### GET BAGGAGE BY ID
+GET {{baseUrl}}/{{tripId}}/baggages/{{baggageId}}
+Authorization: Bearer {{token}}
+
+### UPDATE BAGGAGE
+PATCH {{baseUrl}}/{{tripId}}/baggages/{{baggageId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Passport",
+  "completed": true
+}
+
+### DELETE BAGGAGE
+DELETE {{baseUrl}}/{{tripId}}/baggages/{{baggageId}}
+Authorization: Bearer {{token}}
+
+
+### SEND TRIP INVITATION
+POST {{baseUrl}}/trips/{{tripId}}/invite
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "collaboratorEmails": [
+    "hikamala00@gmail.com"
+  ]
+}
+
+### ACCEPT TRIP INVITATION
+GET {{baseUrl}}/trips/{{tripId}}/invite/accept?token={{tripToken}}
+Authorization: Bearer {{token}}
+
+### CREATE ITINERARY
+POST {{baseUrl}}/{{tripId}}/itinerary
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+"title": "Pokhara Day 1",
+"description": "Explore Pokhara",
+"date": "2026-08-10",
+"activities": [
+    {
+        "name": "Visit Phewa Lake",
+        "time": "10:00 AM",
+        "notes": [
+            "Take a boat ride",
+            "Visit Tal Barahi Temple"
+        ]
+    },
+    {
+        "name": "Visit Davis Falls",
+        "time": "2:00 PM",
+        "notes": [
+            "Take photos"
+        ]
+    }
+    ]
+}
+
+### GET ALL ITINERARIES OF A TRIP
+
+GET {{baseUrl}}/{{tripId}}/itinerary
+Authorization: Bearer {{token}}
+
+### GET ITINERARY BY ID
+
+GET {{baseUrl}}/{{tripId}}/itinerary/{{itineraryId}}
+Authorization: Bearer {{token}}
+
+### UPDATE ITINERARY
+
+PATCH {{baseUrl}}/{{tripId}}/itinerary/{{itineraryId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+"title": "Pokhara Day 1 Updated",
+"description": "Updated Pokhara itinerary",
+"date": "2026-08-11"
+}
+
+### DELETE ITINERARY
+
+DELETE {{baseUrl}}/{{tripId}}/itinerary/{{itineraryId}}
+Authorization: Bearer {{token}}
