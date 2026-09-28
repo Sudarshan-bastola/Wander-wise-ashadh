@@ -7,7 +7,7 @@ import {
   remove,
   invite,
   accept,
-} from "../services/trip.js";
+} from "../Services/trip.js"
 import {
   createTripValidator,
   updateTripValidator,

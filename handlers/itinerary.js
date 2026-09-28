@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { create, find, index, remove, update } from "../services/itinerary.js";
+import { create, find, index, remove, update } from "../Services/itinerary.js";
 
 import {
   createItineraryValidator,

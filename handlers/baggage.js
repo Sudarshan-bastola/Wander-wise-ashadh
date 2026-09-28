@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { create, find, index, remove, update } from '../services/baggage.js';
+import { create, find, index, remove, update } from "../Services/baggage.js";
 import { createBaggageValidator, updateBaggageValidator } from '../validators/baggage.js';
 
 const router = Router({ mergeParams: true });
