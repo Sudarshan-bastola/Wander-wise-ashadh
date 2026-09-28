@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { create, index, find, update, remove } from "../services/user.js";
+import { create, index, find, update, remove } from "../Services/user.js";
 import {
   createUserValidator,
   updateUserValidator,
