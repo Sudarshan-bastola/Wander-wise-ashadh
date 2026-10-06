@@ -40,7 +40,6 @@ export const update = async (itineraryId, tripId, userId, data) => {
     {
       _id: itineraryId,
       trip: tripId,
-      user: userId,
     },
     data,
     { returnDocument: "after" },
@@ -59,7 +58,6 @@ export const remove = async (itineraryId, tripId, userId) => {
   const itinerary = await Itinerary.findOneAndDelete({
     _id: itineraryId,
     trip: tripId,
-    user: userId,
   });
 
   if (!itinerary) {
